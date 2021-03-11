@@ -2,6 +2,10 @@ package com.cos.blog.web;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +26,9 @@ public class PostController {
 	private final PostService postService;
 	
 	@GetMapping("/")
-	public String findAll(Model model) {
-		List<Post> posts = postService.전체찾기();
+	public String findAll(Model model, @PageableDefault(sort = "id",direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
+		
+		Page<Post> posts = postService.전체찾기(pageable);
 		model.addAttribute("posts",posts);
 		return "post/list"; // 기본적으로 return은 forwarding
 	}
@@ -45,7 +50,7 @@ public class PostController {
 		if(postEntity == null) {
 			return "post/saveForm";
 		}else {
-			return "redirect:/post";
+			return "redirect:/";
 		}
 	}
 }

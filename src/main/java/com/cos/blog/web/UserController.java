@@ -15,8 +15,6 @@ import com.cos.blog.config.auth.PrincipalDetails;
 @Controller
 public class UserController {
 	
-	// 
-	
 	@GetMapping("/user")
 	public @ResponseBody String findAll(@AuthenticationPrincipal PrincipalDetails principalDetails) { // @Controller + @ResponseBody = @RestController
 //		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //Authentication 가져옴
