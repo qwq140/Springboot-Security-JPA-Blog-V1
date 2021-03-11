@@ -35,6 +35,7 @@ public class PostController {
 	
 	@PostMapping("/post")
 	public String save(PostSaveReqDto postSaveReqDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println(postSaveReqDto);
 		Post post = postSaveReqDto.toEntity(); // 외부에서 받은 것
 		post.setUser(principalDetails.getUser());
 		

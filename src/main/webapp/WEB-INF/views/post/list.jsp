@@ -5,7 +5,7 @@
 	<c:forEach var="post" items="${posts }">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">${posts.title }</h4>
+				<h4 class="card-title">${post.title }</h4>
 				<a href="/post/${post.id }" class="btn btn-primary">상세보기</a>
 			</div>
 		</div>
