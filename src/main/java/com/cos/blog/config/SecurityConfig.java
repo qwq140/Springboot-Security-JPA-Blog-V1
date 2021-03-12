@@ -15,9 +15,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.cos.blog.config.oauth.OAuth2DetailsService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Configuration // IoC등록
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	private final OAuth2DetailsService oAuth2DetailsService;
 	
 	// IoC등록만 하면 AuthenticationManager가 Bcrypt로 자동 검증해줌.
 	@Bean
@@ -46,6 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //					
 //				}
 //			});
-			.defaultSuccessUrl("/"); // x-www-urlencoded (어느 경로로 갈려고하는데 인증에 막히면 인증 후 그 경로로 감)
+			.defaultSuccessUrl("/") // x-www-urlencoded (어느 경로로 갈려고하는데 인증에 막히면 인증 후 그 경로로 감)
+			.and()
+			.oauth2Login()
+			.userInfoEndpoint()
+			.userService(oAuth2DetailsService);
 	}
 }
