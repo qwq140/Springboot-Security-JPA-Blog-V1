@@ -42,7 +42,7 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService{
 		if(userRequest.getClientRegistration().getClientName().equals("Google")) {
 			oAuth2UserInfo=new GoogleInfo(oauth2User.getAttributes());
 		} else if(userRequest.getClientRegistration().getClientName().equals("Facebook")) {
-			
+			oAuth2UserInfo=new FacebookInfo(oauth2User.getAttributes());
 		}
 		
 		// 2번 최초 : 회원가입 + 로그인, 최초x : 로그인
