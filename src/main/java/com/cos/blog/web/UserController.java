@@ -1,14 +1,10 @@
 package com.cos.blog.web;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,6 +52,10 @@ public class UserController {
 		// 세션 변경 하기 (세션과 DB를 동기화)
 		// UsernamePasswordToken -> Authentication 객체로 만들어서 -> 시큐리티 컨텍스트 홀더에 집어 넣으면 됨.
 		principalDetails.setUser(userEntity);
+		
+//		Authentication authentication = 
+//				new UsernamePasswordAuthenticationToken(userEntity.getUsername(), userEntity.getPassword());
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		return new CMRespDto<>(1,null);
 	}
