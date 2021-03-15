@@ -31,8 +31,8 @@ public class PostController {
 			@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
 		System.out.println("누구로 로그인 됐을까?");
-		System.out.println(principalDetails.isOAuth());
-		System.out.println(principalDetails.getUser().getUsername());
+		//System.out.println(principalDetails.isOAuth());
+		//System.out.println(principalDetails.getUser().getUsername());
 		
 		Page<Post> posts = postService.전체찾기(pageable);
 		model.addAttribute("posts",posts);
