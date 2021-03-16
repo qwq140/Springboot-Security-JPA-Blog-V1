@@ -7,9 +7,16 @@
 			<input type="text" class="form-control" placeholder="Enter Title" name="title"/>
 		</div>
 		<div class="form-group">
-			<textarea rows="" cols="5" class="form-control" name="content"></textarea>
+			<textarea rows="" cols="5" class="form-control" name="content" id="content"></textarea>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>
+<script>
+      $('#content').summernote({
+        tabsize: 2,
+        height: 300
+      });
+</script>
+
 <%@include file="../layout/footer.jsp"%>
