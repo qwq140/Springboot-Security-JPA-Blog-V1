@@ -20,7 +20,9 @@ public class UserService {
 	@Transactional
 	public User 회원수정(int id,UserUpdateReqDto userUpdateReqDto) {
 		// 영속화
-		User userEntity = userRepository.findById(id).get(); // 1차 캐시(메모리 공간)
+		User userEntity = userRepository.findById(id).orElseThrow(()->{
+			return new IllegalArgumentException("id를 찾을 수 없습니다.");
+		}); // 1차 캐시(메모리 공간)
 		String encPassword = bCryptPasswordEncoder.encode(userUpdateReqDto.getPassword());
 		
 		userEntity.setPassword(encPassword);

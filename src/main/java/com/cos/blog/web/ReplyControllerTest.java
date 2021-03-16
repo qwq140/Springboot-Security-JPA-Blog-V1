@@ -27,6 +27,6 @@ public class ReplyControllerTest {
 	@GetMapping("/test/post/{id}")
 	public CMRespDto<?> findById(@PathVariable int id){
 		Post postEntity = postRepository.findById(id).get();
-		return new CMRespDto<>(1, postEntity);
+		return new CMRespDto<>(1,postEntity);
 	}
 }

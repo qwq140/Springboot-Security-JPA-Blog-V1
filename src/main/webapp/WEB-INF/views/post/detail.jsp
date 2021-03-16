@@ -30,7 +30,7 @@
 				<textarea id="reply-content" class="form-control" rows="1"></textarea>
 			</div>
 			<div class="card-footer">
-				<button type="button" id="btn-reply-save" class="btn btn-primary">등록</button>
+				<button type="button" id="btn-reply-save" value="${post.id }" class="btn btn-primary">등록</button>
 			</div>
 		</form>
 	</div>
@@ -52,6 +52,34 @@
 	</div>
 	<!-- 댓글 끝 -->
 </div>
+<script>
+$("#btn-reply-save").on("click",(e)=>{
+
+
+	  let data = {
+			content:$("#reply-content").val(),
+			postId:e.currentTarget.value
+	  };
+
+			
+	  $.ajax({
+			type:"POST",
+			url:"/reply",
+			data:JSON.stringify(data),
+			contentType:"application/json; charset=utf-8",
+			dataType:"json"
+	  }).done((res)=>{
+			console.log(res);
+		    if(res.statusCode===1){
+				history.go(0);
+			} else {
+				alert("댓글 등록에 실패하셨습니다.");
+			}
+	  });
+
+ });
+</script>
+
 <script>
 // for문으로 중첩되는 것들은 리스너가 아닌 onClick으로
 	function deleteReply(id){
