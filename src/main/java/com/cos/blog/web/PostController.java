@@ -1,20 +1,28 @@
 package com.cos.blog.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.blog.config.auth.PrincipalDetails;
@@ -45,25 +53,32 @@ public class PostController {
 		return "post/list"; // 기본적으로 return은 forwarding
 	}
 	
+	@GetMapping("/search")
+	public String findByKeyword(@RequestParam(value = "keyword") String keyword,
+			Model model,
+			@PageableDefault(sort = "id",direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
+		
+		Page<Post> posts = postService.검색하기(pageable, keyword);
+		model.addAttribute("posts", posts);
+		return "post/list";
+		
+	}
+	
 	@GetMapping("/post/saveForm")
 	public String saveForm() {
 		return "post/saveForm";
 	}
 	
 	@PostMapping("/post")
-	public String save(PostSaveReqDto postSaveReqDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		System.out.println(postSaveReqDto);
+	public @ResponseBody CMRespDto<?> save(@Valid @RequestBody PostSaveReqDto postSaveReqDto, BindingResult bindingResult, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println("글쓰기 시작");
 		Post post = postSaveReqDto.toEntity(); // 외부에서 받은 것
 		post.setUser(principalDetails.getUser());
 		
 		// 영속화
 		Post postEntity = postService.글쓰기(post);
 		
-		if(postEntity == null) {
-			return "post/saveForm";
-		}else {
-			return "redirect:/";
-		}
+		return new CMRespDto<>(1,postEntity);
 	}
 	
 	@GetMapping("/post/{id}")
@@ -87,10 +102,9 @@ public class PostController {
 	}
 	
 	@PutMapping("/post/{id}")
-	public @ResponseBody CMRespDto<?> update(@PathVariable int id, @RequestBody PostSaveReqDto dto) {
+	public @ResponseBody CMRespDto<?> update(@PathVariable int id, @Valid @RequestBody PostSaveReqDto dto, BindingResult bindingResult) {
+		
 		postService.수정하기(id, dto);
 		return new CMRespDto<>(1,null);
 	}
-	
-	
 }

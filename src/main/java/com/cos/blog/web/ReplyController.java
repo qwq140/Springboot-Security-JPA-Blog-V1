@@ -1,6 +1,13 @@
 package com.cos.blog.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +38,8 @@ public class ReplyController {
 	}
 	
 	@PostMapping("/reply")
-	public CMRespDto<?> save(@RequestBody ReplySaveReqDto replySaveReqDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
+	public CMRespDto<?> save(@Valid @RequestBody ReplySaveReqDto replySaveReqDto, BindingResult bindingResult,@AuthenticationPrincipal PrincipalDetails principalDetails){
+		
 		Reply reply = replySaveReqDto.toEntity();
 		reply.setUser(principalDetails.getUser());
 		reply.setPost(postSerivce.상세보기(replySaveReqDto.getPostId()));

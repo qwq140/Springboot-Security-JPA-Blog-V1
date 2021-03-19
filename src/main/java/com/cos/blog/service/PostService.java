@@ -24,6 +24,11 @@ public class PostService {
 		return postRepository.findAll(pageable);
 	}
 
+	@Transactional(readOnly = true)
+	public Page<Post> 검색하기(Pageable pageable, String keyword){
+		return postRepository.findByTitleContaining(pageable, keyword);
+	}
+	
 	@Transactional
 	public Post 글쓰기(Post post) {
 		return postRepository.save(post);

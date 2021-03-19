@@ -11,6 +11,7 @@ import com.cos.blog.web.dto.CMRespDto;
 public class GlobalExceptionHandler {
 	@ExceptionHandler(value = IllegalArgumentException.class)
 	public CMRespDto<?> illegalArgument(Exception e){
+		
 		return new CMRespDto<>(-1, null);
 	}
 
