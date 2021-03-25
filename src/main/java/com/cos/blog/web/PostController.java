@@ -41,28 +41,19 @@ public class PostController {
 	
 	@GetMapping("/")
 	public String findAll(Model model, 
-			@PageableDefault(sort = "id",direction = Sort.Direction.DESC, size = 5) Pageable pageable,
-			@AuthenticationPrincipal PrincipalDetails principalDetails) {
+			@PageableDefault(sort = "id",direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+			@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam(required = false, defaultValue = "") String keyword) {
 		
 		System.out.println("누구로 로그인 됐을까?");
 		//System.out.println(principalDetails.isOAuth());
 		//System.out.println(principalDetails.getUser().getUsername());
 		
-		Page<Post> posts = postService.전체찾기(pageable);
+		//Page<Post> posts = postService.전체찾기(pageable);
+		Page<Post> posts = postService.검색하기(pageable,keyword);
 		model.addAttribute("posts",posts);
 		return "post/list"; // 기본적으로 return은 forwarding
 	}
 	
-	@GetMapping("/search")
-	public String findByKeyword(@RequestParam(value = "keyword") String keyword,
-			Model model,
-			@PageableDefault(sort = "id",direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
-		
-		Page<Post> posts = postService.검색하기(pageable, keyword);
-		model.addAttribute("posts", posts);
-		return "post/list";
-		
-	}
 	
 	@GetMapping("/post/saveForm")
 	public String saveForm() {

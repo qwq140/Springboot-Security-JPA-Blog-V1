@@ -16,7 +16,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/pos?serverTimezone=Asia/Seoul
     username: pos
-    password: cos1234
+    password: pos1234
     
   jpa:
     open-in-view: true

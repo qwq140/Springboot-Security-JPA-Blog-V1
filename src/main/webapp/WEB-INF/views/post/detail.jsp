@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div>
-		<button class="btn btn-secondary" onClick="history.go(-1)">뒤로가기</button>
+		<button class="btn btn-success" onClick="history.go(-1)">뒤로가기</button>
 		<c:if test="${post.user.id == principal.user.id }">
 			<a href="/post/${post.id }/updateForm" class="btn btn-warning">수정</a>
 			<button id="btn-delete" class="btn btn-danger" value="${post.id }">삭제</button>
@@ -30,7 +30,7 @@
 				<textarea id="reply-content" class="form-control" rows="1"></textarea>
 			</div>
 			<div class="card-footer">
-				<button type="button" id="btn-reply-save" value="${post.id }" class="btn btn-primary">등록</button>
+				<button type="button" id="btn-reply-save" value="${post.id }" class="btn btn-success">등록</button>
 			</div>
 		</form>
 	</div>
@@ -44,7 +44,9 @@
 						<div>${reply.content }</div> <!-- 레이징로딩 시작 - 이유는 getter 호출되니까 (세션이 열려있음 open in view 모드에서만) -->
 						<div class="d-flex">
 							<div class="font-italic">작성자 : ${reply.user.username } &nbsp;</div>
-							<button onClick="deleteReply(${reply.id})" class="badge">삭제</button>		
+						<c:if test="${ reply.user.id == principal.user.id }">	
+							<button onClick="deleteReply(${reply.id})" class="badge">삭제</button>
+						</c:if>		
 						</div>
 					</li>
 				</c:forEach>

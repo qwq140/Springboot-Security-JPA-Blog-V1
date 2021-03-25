@@ -26,7 +26,7 @@ public class PostService {
 
 	@Transactional(readOnly = true)
 	public Page<Post> 검색하기(Pageable pageable, String keyword){
-		return postRepository.findByTitleContaining(pageable, keyword);
+		return postRepository.findByTitleContainingOrContentContaining(pageable, keyword, keyword);
 	}
 	
 	@Transactional

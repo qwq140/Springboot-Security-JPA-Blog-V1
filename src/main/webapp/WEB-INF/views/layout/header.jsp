@@ -21,6 +21,18 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/fonts/icomoon/style.css">
+
+<link rel="stylesheet" href="/css/owl.carousel.min.css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="/css/style.css">
 
 <!-- include summernote css/js -->
 <link
@@ -28,12 +40,12 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<title>Blog</title>
+<title>Comu</title>
 </head>
 <body>
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-md bg-success navbar-dark">
 		<!-- Brand -->
-		<a class="navbar-brand" href="/">Blog</a>
+		<a class="navbar-brand" href="/">Comu</a>
 
 		<!-- Toggler/collapsibe Button -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -61,11 +73,6 @@
 							href="/user/${principal.user.id }">회원정보보기</a></li>
 						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 					</ul>
-					<form class="form-inline" action="/search" method="GET">
-						<input class="form-control mr-sm-2" type="text"
-							placeholder="Search" name="keyword">
-						<button class="btn btn-success" type="submit">Search</button>
-					</form>
 				</div>
 			</c:otherwise>
 		</c:choose>

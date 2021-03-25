@@ -9,7 +9,7 @@
 		<div class="form-group">
 			<textarea rows="" cols="5" class="form-control" name="content" id="content"></textarea>
 		</div>
-		<button type="button" id="btn-save" class="btn btn-primary">Submit</button>
+		<button type="button" id="btn-save" class="btn btn-success">Submit</button>
 	</form>
 </div>
 <script>
