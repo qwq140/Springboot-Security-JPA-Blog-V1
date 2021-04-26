@@ -282,5 +282,5 @@ $("#btn-update").on("click",(e)=>{
 패스워드와 email 수정가능
 
 
-## 디자인
+## 영상
 ![녹화_2021_03_25_23_55_31_809](https://user-images.githubusercontent.com/74044232/112493889-e41b4c00-8dc5-11eb-8369-43e988bc5761.gif)
