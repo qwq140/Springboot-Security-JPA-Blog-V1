@@ -180,7 +180,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 - 댓글작성, 삭제
 - 자기가 쓴 글일 경우 수정, 삭제 가능
 
-#### 비동기 통신으로 댓글 구현하기 위해 Ajax 사용
+#### AJAX를 이용하여 댓글 구현
 - 댓글 등록
 ```javascript
 $("#btn-reply-save").on("click",(e)=>{
